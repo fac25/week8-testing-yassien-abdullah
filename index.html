@@ -24,11 +24,26 @@
 
             <section>
                 <!-- form for user input goes here-->
+                <form id="theForm">
+                    <label for="taskToAdd">Add a task to the to-do list:</label>
+                    <textarea rows="1" cols="40" id="taskToAdd"></textarea>
+
+                    <button type="submit">Add</button>
+                </form>
             </section>
 
             <section>
+                <h2 id="h2ForIncompleteTasks"></h2>
                 <!-- to do list is displayed here -->
+                <ul id="theList"></ul>
             </section>
+
+            <section>
+                <h2 id="h2ForCompletedTasks"></h2>
+                <!-- completed tasks are displayed here -->
+                <ul id="theCompletedTasks"></ul>
+            </section>
+
 
         </main>
 
