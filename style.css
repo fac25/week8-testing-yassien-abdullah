@@ -1,0 +1,25 @@
+/* remove default list styling */
+ul {
+    list-style-type: none;
+}
+
+/* add some space between the delete button and task text */
+.delete {
+    margin-left: 0.5rem;
+}
+
+/* add some space between the checkbox and task text */
+.checkbox {
+    margin-right: 0.5rem;
+}
+
+/* styling for completed tasks */
+.completed-task {
+    text-decoration:line-through; /* put a line through the text */
+    color: rgba(0, 0, 0, 0.8); /* make the text a bit more transparent */
+}
+
+/* class for hiding stuff on the page */
+.hidden {
+    display: none;
+}
