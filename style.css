@@ -16,7 +16,7 @@ ul {
 /* styling for completed tasks */
 .completed-task {
     text-decoration:line-through; /* put a line through the text */
-    color: rgba(0, 0, 0, 0.8); /* make the text a bit more transparent */
+    color: rgba(0, 0, 0, 0.5); /* make the text a bit more transparent */
 }
 
 /* class for hiding stuff on the page */

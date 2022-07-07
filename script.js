@@ -41,9 +41,11 @@ const createTask = (text, id) => {
     // Create a checkbox and add the filter functionality to it
     let taskCompleted = document.createElement("input");
     taskCompleted.setAttribute("type", "checkbox");
+    taskCompleted.setAttribute("id", `check-uncheck-task-${id}`);
     taskCompleted.addEventListener("change", markCompleted);
     // Create a delete button and add the event listener to it
     let deleteButton = document.createElement("button");
+    deleteButton.setAttribute("id", `delete-task-${id}`);
     deleteButton.textContent = "delete";
     deleteButton.addEventListener("click", deleteFromList);
     // Append the created elements to the liste item
