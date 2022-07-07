@@ -42,5 +42,54 @@ test("Deleting an entry removes it from the completed tasks list", () => {
     equal(result, expected);
 
 
-    /*the test correctly fails*/
+    /*the test fails, as it should*/
+});
+
+test("Checking an entry marks it as complete", () => {
+
+    // first get the entry to be marked as complete
+    let entryToBeMarkedAsCompleted = document.getElementById("task-4");
+    
+    //then get the corresponding checkbox for that entry
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-4");
+
+    //then click that checkbox
+    correspondingCheckbox.click();
+
+    //then set a 'result' and 'expected' to compare using the equal fn
+    //theCompletedTasks ul should now contain the li that was marked as completed
+
+    let result = document.getElementById("theCompletedTasks").contains(entryToBeMarkedAsCompleted);
+    const expected = true;
+
+    //now compare them
+    equal(result, expected);
+
+
+    /*the test passes, as it should*/
+});
+
+
+test("Unchecking an entry restores it to the tasks yet to be done section", () => {
+
+    // first get the entry to be unchecked
+    let entryToBeUnMarkedAsCompleted = document.getElementById("task-4");
+    
+    //then get the corresponding checkbox for that entry
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-4");
+
+    //then click that checkbox
+    correspondingCheckbox.click();
+
+    //then set a 'result' and 'expected' to compare using the equal fn
+    //theList ul should now contain the li that was unchecked
+
+    let result = document.getElementById("theList").contains(entryToBeUnMarkedAsCompleted);
+    const expected = true;
+
+    //now compare them
+    equal(result, expected);
+
+
+    /*the test passes, as it should*/
 });

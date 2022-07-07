@@ -41,6 +41,7 @@ const createTask = (text, id) => {
     // Create a checkbox and add the filter functionality to it
     let taskCompleted = document.createElement("input");
     taskCompleted.setAttribute("type", "checkbox");
+    taskCompleted.setAttribute("id", `check-uncheck-task-${id}`);
     taskCompleted.addEventListener("change", markCompleted);
     // Create a delete button and add the event listener to it
     let deleteButton = document.createElement("button");
