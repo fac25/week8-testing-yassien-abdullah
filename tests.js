@@ -162,3 +162,43 @@ test("Checking an entry that a user added (i.e not one of the default ones) mark
 
     /*the test passes, as it should*/
 });
+
+
+test("Unchecking an entry that a user added (i.e not one of the default ones) and marked as complete restores it to the tasks yet to be done section", () => {
+
+
+    //first add an entry
+
+    //write into the textarea
+    let entryToBeAdded = `Find the fountain of youth`;
+    document.getElementById("taskToAdd").value = entryToBeAdded;
+
+    //get and then click the add button
+    const addButton = document.querySelector("button[type='submit']");
+    addButton.click();
+
+    // now mark that same entry as complete (only to be unchecked later)
+    let entryToBeMarkedAsCompletedAndThenUnchecked = document.getElementById("task-6");
+    
+    //then get the corresponding checkbox for that entry
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-6");
+
+    //then click that checkbox
+    correspondingCheckbox.click();
+
+    //then click that checkbox again to mark it in-complete this time
+    correspondingCheckbox.click();
+
+
+    //then set a 'result' and 'expected' to compare using the equal fn
+    //theList ul should now contain the li that was unchecked
+
+    let result = document.getElementById("theList").contains(entryToBeMarkedAsCompletedAndThenUnchecked);
+    const expected = true;
+
+    //now compare them
+    equal(result, expected);
+
+
+    /*the test passes, as it should*/
+});
