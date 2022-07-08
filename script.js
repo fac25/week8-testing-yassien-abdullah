@@ -47,6 +47,7 @@ const createTask = (text, id) => {
     let deleteButton = document.createElement("button");
     deleteButton.setAttribute("id", `delete-task-${id}`);
     deleteButton.textContent = "delete";
+    deleteButton.classList.add("delete")
     deleteButton.addEventListener("click", deleteFromList);
     // Append the created elements to the liste item
     taskElement.append(taskText, taskCompleted, deleteButton);

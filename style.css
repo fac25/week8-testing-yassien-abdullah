@@ -1,6 +1,44 @@
+:root {
+    --primary-color: rgb(19, 68, 117);
+    --white: rgb(250, 250, 250);
+    --white--transparent: rgba(230, 230, 230, .3);
+    --red: rgb(203, 42, 42);
+    --secondary-color: rgb(46, 111, 73);
+}
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+
+}
+
+html {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
 /* remove default list styling */
 ul {
     list-style-type: none;
+}
+
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.6rem;
 }
 
 /* add some space between the delete button and task text */
@@ -22,4 +60,87 @@ ul {
 /* class for hiding stuff on the page */
 .hidden {
     display: none;
+}
+
+.sr-only {
+    position: absolute !important; 
+    height: 1px; width: 1px; 
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); 
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.btn {
+    background-color: var(--secondary-color);
+    padding: 5px 10px;
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: calc(14rem / 16);
+}
+
+.container {
+    width: 100%;
+    padding: 1.5rem;
+    margin: 0 auto;
+}
+
+
+/* header */
+header {
+    background-color: var(--white--transparent);
+    text-align: center;
+    padding: calc(10rem / 16) 0;
+}
+
+h1 {
+    font-size: calc(35rem / 16);
+}
+
+/* The form */
+form {
+    display: flex;
+    max-width: calc(650rem / 16);
+    margin: 0 auto;
+}
+
+form input {
+    flex: 1;
+    padding: 10px 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+}
+
+form button {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+@media  (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+
+@media  (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media  (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+
 }
