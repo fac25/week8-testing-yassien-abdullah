@@ -17,7 +17,7 @@ test("Deleting an entry removes it from the tasks yet to be done list", () => {
     equal(result, expected);
 
 
-    /*the test correctly fails
+    /*the test passes, as it should
 
     note that if you assign result as entryToBeDeleted in line 13, the test DOES NOT work
     remember to ask Oli why*/
@@ -42,7 +42,7 @@ test("Deleting an entry removes it from the completed tasks list", () => {
     equal(result, expected);
 
 
-    /*the test fails, as it should*/
+    /*the test passes, as it should*/
 });
 
 test("Checking an entry marks it as complete", () => {
@@ -85,6 +85,115 @@ test("Unchecking an entry restores it to the tasks yet to be done section", () =
     //theList ul should now contain the li that was unchecked
 
     let result = document.getElementById("theList").contains(entryToBeUnMarkedAsCompleted);
+    const expected = true;
+
+    //now compare them
+    equal(result, expected);
+
+
+    /*the test passes, as it should*/
+});
+
+
+test("Deleting an entry that a user added (i.e not one of the default ones) removes it from the tasks yet to be done list", () => {
+
+    //first add an entry
+
+    //write into the textarea
+    let entryToBeAdded = `Ensure github profile looks nice`;
+    document.getElementById("taskToAdd").value = entryToBeAdded;
+
+    //get and then click the add button
+    const addButton = document.querySelector("button[type='submit']");
+    addButton.click();
+
+
+    //now get that same entry and delete it
+    let entryToBeDeleted = document.getElementById("task-5");
+    
+    //then get the corresponding delete button for that entry
+    let correspondingDeleteButton = document.getElementById("delete-task-5");
+
+    //then click that delete button
+    correspondingDeleteButton.click();
+
+    //then set a 'result' and 'expected' to compare using the equal fn
+    let result = document.getElementById("task-5");
+    const expected = null;
+
+    //now compare them
+    equal(result, expected);
+
+
+    /*the test passes, as it should*/
+});
+
+test("Checking an entry that a user added (i.e not one of the default ones) marks it as complete", () => {
+
+    //first add an entry
+
+    //write into the textarea
+    let entryToBeAdded = `Commit code to github on 08/07`;
+    document.getElementById("taskToAdd").value = entryToBeAdded;
+
+    //get and then click the add button
+    const addButton = document.querySelector("button[type='submit']");
+    addButton.click();
+
+
+    // now mark that same entry as complete
+    let entryToBeMarkedAsCompleted = document.getElementById("task-5");
+    
+    //then get the corresponding checkbox for that entry
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-5");
+
+    //then click that checkbox
+    correspondingCheckbox.click();
+
+    //then set a 'result' and 'expected' to compare using the equal fn
+    //theCompletedTasks ul should now contain the li that was marked as completed
+
+    let result = document.getElementById("theCompletedTasks").contains(entryToBeMarkedAsCompleted);
+    const expected = true;
+
+    //now compare them
+    equal(result, expected);
+
+
+    /*the test passes, as it should*/
+});
+
+
+test("Unchecking an entry that a user added (i.e not one of the default ones) and marked as complete restores it to the tasks yet to be done section", () => {
+
+
+    //first add an entry
+
+    //write into the textarea
+    let entryToBeAdded = `Find the fountain of youth`;
+    document.getElementById("taskToAdd").value = entryToBeAdded;
+
+    //get and then click the add button
+    const addButton = document.querySelector("button[type='submit']");
+    addButton.click();
+
+    // now mark that same entry as complete (only to be unchecked later)
+    let entryToBeMarkedAsCompletedAndThenUnchecked = document.getElementById("task-6");
+    
+    //then get the corresponding checkbox for that entry
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-6");
+
+    //then click that checkbox
+    correspondingCheckbox.click();
+
+    //then click that checkbox again to mark it in-complete this time
+    correspondingCheckbox.click();
+
+
+    //then set a 'result' and 'expected' to compare using the equal fn
+    //theList ul should now contain the li that was unchecked
+
+    let result = document.getElementById("theList").contains(entryToBeMarkedAsCompletedAndThenUnchecked);
     const expected = true;
 
     //now compare them
