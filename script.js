@@ -36,8 +36,9 @@ const createTask = (text, id) => {
     let taskElement = document.createElement("li");
     taskElement.setAttribute("id", `task-${id}`);
     // Create a span to hold the task text
-    let taskText = document.createElement("span");
+    let taskText = document.createElement("label");
     taskText.textContent = text;
+    taskText.setAttribute("for", "check-uncheck-task-" + id);
     // Create a checkbox and add the filter functionality to it
     let taskCompleted = document.createElement("input");
     taskCompleted.setAttribute("type", "checkbox");
@@ -73,7 +74,7 @@ for (let i = 0; i < tasksArray.length; i++) {
         let h2 = document.getElementById("h2ForCompletedTasks");
         h2.innerHTML = "Completed tasks";
         item.querySelector('input[type="checkbox"]').setAttribute("checked", true);
-        item.classList.add("completed-task");
+        item.querySelector('label').classList.add("completed-task");
         listOfCompletedTasks.append(item);
     }
     // If the task completed property is false add it to the incomplete list
@@ -224,7 +225,8 @@ function markCompleted(){
         h2.innerHTML = "Completed tasks";
         // Change the completed state if the task inside the tasks array to reflect the change
         tasksArray[ind].completed = true;
-        this.parentElement.classList.add("completed-task");
+
+        this.parentElement.querySelector('label').classList.add("completed-task");
         //Add the task to the completed list
         listOfCompletedTasks.append(this.parentElement);
         // Remove the task from the incompleted list
@@ -237,7 +239,7 @@ function markCompleted(){
         h2.innerHTML = "Tasks yet to be done";
         // Change the completed state if the task inside the tasks array to reflect the change
         tasksArray[ind].completed = false;
-        this.parentElement.classList.remove("completed-task");
+        this.parentElement.querySelector('label').classList.remove("completed-task");
         //Add the task to the incomplete list
         toDoList.append(this.parentElement);
         // Remove the task from the completed tasks list
