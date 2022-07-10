@@ -75,7 +75,8 @@ button {
     border: none;
     cursor: pointer;
     display: inline-block;
-    font-size: calc(16rem / 16);
+    font-size: calc(14rem / 16);
+    letter-spacing: inherit;
     text-transform: uppercase;
 }
 
