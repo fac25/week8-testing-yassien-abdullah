@@ -26,5 +26,5 @@ As a busy person, I want to:
 
 - [x] A working to-do list
 - [ ] Tests for (at least) each user story
-- [ ] A responsive, mobile-first design
+- [x] A responsive, mobile-first design
 - [ ] Ensure your app is accessible to as many different users as possible
