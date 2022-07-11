@@ -1,3 +1,43 @@
+test("Adding a task shows it on  the tasks yet to be done list", () => {
+
+    // first get the user input field
+    let task = document.getElementById("taskToAdd");
+    // Add the task text to it
+    task.value = "Test task";
+    
+    //then get the submit button
+    let addButton = document.querySelector("[type='submit']");
+
+    // click to add the task to the uncompleted tasks list
+    addButton.click();
+
+    // Reset the user input field
+    task.value = "";
+
+    // Get the uncompleted list and the last task added
+    let uncompletedTasksList = document.querySelector("#theList");
+    let lastItem = uncompletedTasksList.querySelector("li:last-child");
+
+
+    // Check the last item added task text to the one you added before "Test task"
+    let result = lastItem.querySelector("label").textContent;
+    const expected = "Test task";
+
+    //now compare them
+    equal(result, expected);
+
+    // Remove the task from the UI and the tasks array, so it doesn't mess with other tests.
+    let splitId = lastItem.id.split("-");
+    // Get the number of the id
+    let id = splitId[1];
+    // Find the index of the task in the task array that matches the number if the id of the list item
+    let ind = tasksArray.findIndex(el => el.id === Number(id));
+    // Remove the deleted task from the tasks array
+    tasksArray.splice(ind, 1);
+    uncompletedTasksList.removeChild(lastItem);
+    
+});
+
 test("Deleting an entry removes it from the tasks yet to be done list", () => {
 
     // first get the entry to be deleted
