@@ -30,14 +30,34 @@ const tasksArray = [
     }
 ]
 
+// Show or hide the list section depending if it has tasks or not
+const showOrHideSection = () => {
+    if(//i.e if there are no more incomplete tasks
+        document.getElementById("theList").childElementCount == 0
+    ){//remove the relevant h2's text
+        document.querySelector(".unfinished-section").classList.add("hidden")
+    } else {
+        document.querySelector(".unfinished-section").classList.remove("hidden")
+    }
+
+    if(//i.e if there are no more completed tasks
+        document.getElementById("theCompletedTasks").childElementCount == 0
+    ){//remove the relevant h2's text
+        document.querySelector(".completed-section").classList.add("hidden")
+    } else {
+        document.querySelector(".completed-section").classList.remove("hidden")
+    }
+}
+
 // Create task
 const createTask = (text, id) => {
     // Create a task li element wit an id
     let taskElement = document.createElement("li");
     taskElement.setAttribute("id", `task-${id}`);
     // Create a span to hold the task text
-    let taskText = document.createElement("span");
+    let taskText = document.createElement("label");
     taskText.textContent = text;
+    taskText.setAttribute("for", "check-uncheck-task-" + id);
     // Create a checkbox and add the filter functionality to it
     let taskCompleted = document.createElement("input");
     taskCompleted.setAttribute("type", "checkbox");
@@ -47,6 +67,7 @@ const createTask = (text, id) => {
     let deleteButton = document.createElement("button");
     deleteButton.setAttribute("id", `delete-task-${id}`);
     deleteButton.textContent = "delete";
+    deleteButton.classList.add("delete")
     deleteButton.addEventListener("click", deleteFromList);
     // Append the created elements to the liste item
     taskElement.append(taskText, taskCompleted, deleteButton);
@@ -60,8 +81,7 @@ const createId = (array) => {
     return array[array.length - 1].id + 1;
 }
 
-//variable to be incremented after each task is successfully added
-// let taskNumber = 0;
+
 
 // Loop through the default tasks and show them on their respective lists
 for (let i = 0; i < tasksArray.length; i++) {
@@ -72,7 +92,7 @@ for (let i = 0; i < tasksArray.length; i++) {
         let h2 = document.getElementById("h2ForCompletedTasks");
         h2.innerHTML = "Completed tasks";
         item.querySelector('input[type="checkbox"]').setAttribute("checked", true);
-        item.classList.add("completed-task");
+        item.querySelector('label').classList.add("completed-task");
         listOfCompletedTasks.append(item);
     }
     // If the task completed property is false add it to the incomplete list
@@ -82,6 +102,8 @@ for (let i = 0; i < tasksArray.length; i++) {
         toDoList.append(item);
     }
 }
+
+showOrHideSection();
 
 function addTask(event) {
     event.preventDefault();
@@ -113,101 +135,14 @@ function addTask(event) {
     //empty the textarea for the subsequent tasks to be added
     document.getElementById("taskToAdd").value = "";
     console.log(tasksArray)
+    showOrHideSection();
 }
 
-// function addTask(event) {
-//     event.preventDefault();
-
-//     //increment the taskCounter
-//     taskNumber++;
-
-//     //get the task
-//     let taskUserWantsToAdd = document.getElementById("taskToAdd").value;
-//     console.log(taskUserWantsToAdd);
-
-//     //get the list
-//     const toDoList = document.getElementById("theList");
-//     console.log(toDoList);
-
-//     //now that a task has been added, write into the relevant h2
-//     let h2 = document.getElementById("h2ForIncompleteTasks");
-//     h2.innerHTML = "Tasks yet to be done";
-
-//     //add task, checkbox and delete button to the list
-//     toDoList.innerHTML += `<li id="Task${taskNumber}">` +
-//     `<input type="checkbox" id="checkboxForTask${taskNumber}"` + 
-//     `aria-label="Mark this task as completed" class="checkbox">` + 
-//     `<span id="task${taskNumber}Text">${taskUserWantsToAdd}</span>` +
-//     `<span id="deleteTask${taskNumber}" class="delete"` + 
-//     `aria-label="Delete this task from the to-do list">&times;</span>` + 
-//     `</li>`
-
-
-//     /*loop through all the complete buttons and add event listeners for them so they can 
-//     be marked as complete when clicked
-
-//     Note: When you attach an event handler inline, eg onclick=“markCompleted()”, 
-//     within the function "this" refers to window. so basically use event handlers IN 
-//     the js file instead of onclick, onchange etc in the html element if you want to 
-//     get the value or id of “this” otherwise you just get undefined
-    
-//     Note2: For some reason the buttons dont work if they event listeners are added 
-//     AFTER/outside the addTask fn scope*/
-//     const checkboxes = document.querySelectorAll(".checkbox");
-//     for (let i = 0; i < checkboxes.length; i++) {
-//       checkboxes[i].addEventListener("click", markCompleted); 
-//     }
-    
-//     //same again for the delete "buttons"
-//     const deleteButtons = document.querySelectorAll(".delete");
-//     for (let i = 0; i < deleteButtons.length; i++) {
-//       deleteButtons[i].addEventListener("click", deleteFromList);
-//     }
-
-//     //empty the textarea for the subsequent tasks to be added
-//     document.getElementById("taskToAdd").value = "";
-// }
 
 
 
 
 
-// function markCompleted(){
-//     console.log(this.id);
-
-//     //first get the task number for which the checkbox was clicked
-//     let taskNumberForClickedCheckbox = this.id.slice(15);
-//     console.log(taskNumberForClickedCheckbox);
-
-//     //then get the span containing the task text
-//     let idOfSpanContainingTaskText = `task${taskNumberForClickedCheckbox}Text`;
-//     let taskTextSpan = document.getElementById(idOfSpanContainingTaskText);
-    
-//     //then add the completed-task class to that span
-//     taskTextSpan.className += "completed-task";
-
-//     //then remove the checkbox 
-//     this.parentNode.removeChild(this);
-
-//     //then move the completed task below the non-completed tasks
-//     let listOfCompletedTasks = document.getElementById("theCompletedTasks");
-//     let idOfTaskToMove = `Task${taskNumberForClickedCheckbox}`;
-//     let taskToMove = document.getElementById(idOfTaskToMove);
-//     listOfCompletedTasks.appendChild(taskToMove);
-
-//     //now that a task has been marked as complete, write into the relevant h2
-//     let h2 = document.getElementById("h2ForCompletedTasks");
-//     h2.innerHTML = "Completed tasks";
-
-//     if(//i.e if there are no more incomplete tasks
-//         document.getElementById("theList").childElementCount == 0
-//     ){//remove the relevant h2's text
-//         document.getElementById("h2ForIncompleteTasks").innerHTML = ""
-//     }
-   
-
-    
-// }
 
 
 function markCompleted(){
@@ -218,12 +153,10 @@ function markCompleted(){
     // Find the index of the task in the task array that matches the number if the id of the list item
     let ind = tasksArray.findIndex(el => el.id === Number(id));
     if (this.checked) {
-        //now that a task has been marked as complete, write into the relevant h2
-        let h2 = document.getElementById("h2ForCompletedTasks");
-        h2.innerHTML = "Completed tasks";
         // Change the completed state if the task inside the tasks array to reflect the change
         tasksArray[ind].completed = true;
-        this.parentElement.classList.add("completed-task");
+
+        this.parentElement.querySelector('label').classList.add("completed-task");
         //Add the task to the completed list
         listOfCompletedTasks.append(this.parentElement);
         // Remove the task from the incompleted list
@@ -231,12 +164,9 @@ function markCompleted(){
             toDoList.removeChild(this.parentElement);
         }
     } else {
-        //now that a task has been marked as incomplete, write into the relevant h2
-        let h2 = document.getElementById("h2ForIncompleteTasks");
-        h2.innerHTML = "Tasks yet to be done";
         // Change the completed state if the task inside the tasks array to reflect the change
         tasksArray[ind].completed = false;
-        this.parentElement.classList.remove("completed-task");
+        this.parentElement.querySelector('label').classList.remove("completed-task");
         //Add the task to the incomplete list
         toDoList.append(this.parentElement);
         // Remove the task from the completed tasks list
@@ -244,48 +174,14 @@ function markCompleted(){
             listOfCompletedTasks.removeChild(this.parentElement);
         }
     }
-
-    if(//i.e if there are no more incomplete tasks
-        document.getElementById("theList").childElementCount == 0
-    ){//remove the relevant h2's text
-        document.getElementById("h2ForIncompleteTasks").innerHTML = ""
-    }
-
-    if(//i.e if there are no more completed tasks
-        document.getElementById("theCompletedTasks").childElementCount == 0
-    ){//remove the relevant h2's text
-        document.getElementById("h2ForCompletedTasks").innerHTML = ""
-    }
+    showOrHideSection();
    
 
     
 }
 
 
-// function deleteFromList() {
-//     console.log(this.id);
 
-//     let idOfElementToBeRemoved = this.id.slice(6);
-//     console.log(idOfElementToBeRemoved);
-
-//     const elementToRemove = document.getElementById(idOfElementToBeRemoved);
-//     elementToRemove.parentNode.removeChild(elementToRemove);
-
-//     if(//i.e if there are no more incomplete tasks
-//         document.getElementById("theList").childElementCount == 0
-//     ){//remove the relevant h2's text
-//         document.getElementById("h2ForIncompleteTasks").innerHTML = ""
-//     }
-
-//     if(//i.e if there are no more completed tasks
-//         document.getElementById("theCompletedTasks").childElementCount == 0
-//     ){//remove the relevant h2's text
-//         document.getElementById("h2ForCompletedTasks").innerHTML = ""
-//     }
-   
-
-
-// }
 
 
 function deleteFromList() {
@@ -302,16 +198,6 @@ function deleteFromList() {
     const elementToRemove = document.getElementById(this.parentElement.id);
     elementToRemove.parentElement.removeChild(elementToRemove);
 
-    if(//i.e if there are no more incomplete tasks
-        document.getElementById("theList").childElementCount == 0
-    ){//remove the relevant h2's text
-        document.getElementById("h2ForIncompleteTasks").innerHTML = ""
-    }
-
-    if(//i.e if there are no more completed tasks
-        document.getElementById("theCompletedTasks").childElementCount == 0
-    ){//remove the relevant h2's text
-        document.getElementById("h2ForCompletedTasks").innerHTML = ""
-    }
+    showOrHideSection();
 
 }

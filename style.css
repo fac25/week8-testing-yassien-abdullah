@@ -1,25 +1,198 @@
-/* remove default list styling */
+/* Global */
+:root {
+    --primary-color: rgb(19, 68, 117);
+    --white: rgb(250, 250, 250);
+    --white--transparent: rgba(230, 230, 230, .3);
+    --red: rgb(203, 42, 42);
+    --secondary-color: rgb(46, 111, 73);
+    --black-transparent: rgba(0, 0, 0, 0.5);
+}
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+
+}
+
+html {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body {
+    font-size: calc(16rem / 16);
+    letter-spacing: 1px;
+    line-height: 1.5;
+    min-height: 100vh;
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
 ul {
     list-style-type: none;
+    padding: calc(15rem / 16);
+    border-radius: 10px;
+    background-color: var(--black-transparent);
+
 }
 
-/* add some space between the delete button and task text */
-.delete {
-    margin-left: 0.5rem;
+ul li {
+    display: flex;
+    align-items: center;
+    padding: 15px 5px;
 }
 
-/* add some space between the checkbox and task text */
-.checkbox {
-    margin-right: 0.5rem;
+ul label {
+    font-size: calc(20rem / 16);
+    margin-right: auto;
 }
 
-/* styling for completed tasks */
-.completed-task {
-    text-decoration:line-through; /* put a line through the text */
-    color: rgba(0, 0, 0, 0.5); /* make the text a bit more transparent */
+ul input,
+ul button {
+    margin-left: calc(10rem / 16);
 }
 
-/* class for hiding stuff on the page */
+ul button {
+    padding: 5px 10px;
+    color: var(--red);
+    border: 1px solid var(--red);
+    border-radius: 5px;
+}
+
+
+
+h2 {
+    font-size: calc(22rem / 16);
+    text-transform: uppercase;
+    margin-bottom: calc(15rem / 16);
+    text-align: center;
+}
+
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: calc(14rem / 16);
+    letter-spacing: inherit;
+    text-transform: uppercase;
+}
+
+/* Reusable classes */
 .hidden {
     display: none;
+}
+
+.sr-only {
+    position: absolute !important; 
+    height: 1px; width: 1px; 
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); 
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.btn {
+    background-color: var(--secondary-color);
+    padding: 5px 10px;
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: calc(14rem / 16);
+}
+
+.container {
+    width: 100%;
+    padding: 1.5rem;
+    margin: 0 auto;
+}
+
+/* Lists styles*/
+
+.lists-grid {
+    display: grid;
+    grid-template-columns: minmax(calc(300rem / 16), calc(650rem / 16));
+    justify-content: center;
+    gap: calc(15rem / 16);
+}
+
+.completed-task {
+    text-decoration: line-through;
+    color: var(--white--transparent);
+}
+
+
+/* header */
+header {
+    background-color: var(--white--transparent);
+    text-align: center;
+    padding: calc(10rem / 16) 0;
+}
+
+h1 {
+    font-size: calc(35rem / 16);
+}
+
+/* The form */
+form {
+    display: flex;
+    max-width: calc(650rem / 16);
+    margin: 0 auto;
+}
+
+form input {
+    flex: 1;
+    padding: 10px 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+}
+
+form button {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+
+
+@media  (min-width: 540px) {
+    body {
+        font-size: calc(18rem / 16);
+    }
+
+    h2 {
+        font-size: calc(26rem / 16);
+    }
+}
+
+@media  (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+
+@media  (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    .lists-grid {
+        grid-template-columns: repeat(2, calc(500rem / 16));
+    }
+}
+
+@media  (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+
 }

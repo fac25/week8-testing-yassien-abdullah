@@ -23,26 +23,30 @@
         <main>
 
             <section>
+                <div class="container">
+                    <form id="theForm">
+                        <label class="sr-only" for="taskToAdd">Add a task to the to-do list:</label>
+                        <input type="text" name="taskToAdd" id="taskToAdd" placeholder="Add a task" required/>
+    
+                        <button class="btn" type="submit">Add</button>
+                    </form>
+                </div>
                 <!-- form for user input goes here-->
-                <form id="theForm">
-                    <label for="taskToAdd">Add a task to the to-do list:</label>
-                    <textarea rows="1" cols="40" id="taskToAdd"></textarea>
-
-                    <button type="submit">Add</button>
-                </form>
             </section>
 
-            <section>
-                <h2 id="h2ForIncompleteTasks"></h2>
-                <!-- to do list is displayed here -->
-                <ul id="theList"></ul>
-            </section>
-
-            <section>
-                <h2 id="h2ForCompletedTasks"></h2>
-                <!-- completed tasks are displayed here -->
-                <ul id="theCompletedTasks"></ul>
-            </section>
+            <div class="lists-grid container">
+                <section class="unfinished-section">
+                        <h2 id="h2ForIncompleteTasks">Tasks yet to be done</h2>
+                        <!-- to do list is displayed here -->
+                        <ul id="theList"></ul>
+                </section>
+    
+                <section class="completed-section">
+                        <h2 id="h2ForCompletedTasks"></h2>
+                        <!-- completed tasks are displayed here -->
+                        <ul id="theCompletedTasks"></ul>
+                </section>
+            </div>
 
 
         </main>
