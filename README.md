@@ -14,7 +14,7 @@ As a busy person, I want to:
 
 As a motor-impaired user, I want to:
 
-- [ ] Use all the features of the app without a mouse
+- [x] Use all the features of the app without a mouse
 
 ### Stretch user stories
 
@@ -25,6 +25,6 @@ As a busy person, I want to:
 ## Acceptance Criteria
 
 - [x] A working to-do list
-- [ ] Tests for (at least) each user story
+- [x] Tests for (at least) each user story
 - [x] A responsive, mobile-first design
 - [ ] Ensure your app is accessible to as many different users as possible
