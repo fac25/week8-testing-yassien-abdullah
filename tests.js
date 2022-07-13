@@ -43,7 +43,7 @@ test("Deleting an entry removes it from the tasks yet to be done list", () => {
     // first get the entry to be deleted
     let entryToBeDeleted = document.getElementById("task-1");
     
-    //then get the corresponding delete button for that entry
+    // then get the corresponding delete button for that entry
     let correspondingDeleteButton = document.getElementById("delete-task-1");
 
     //then click that delete button
@@ -56,11 +56,23 @@ test("Deleting an entry removes it from the tasks yet to be done list", () => {
     //now compare them
     equal(result, expected);
 
+    // Check if the element is removed from the array
+    let filtered = tasksArray.filter(el => el.id === 1);
+    equal(0, filtered.length);
 
-    /*the test passes, as it should
+    /*the test passes, as it should*/
 
-    note that if you assign result as entryToBeDeleted in line 13, the test DOES NOT work
-    remember to ask Oli why*/
+    // Add the element again to the incompleted list
+    let task = createTask("Get groceries", 1);
+    toDoList.prepend(task);
+
+    // Add the element again to the tasksArray
+    let taskObject = {
+        task: "Get groceries",
+        id: 1,
+        completed: false
+    }
+    tasksArray.unshift(taskObject);
 });
 
 test("Deleting an entry removes it from the completed tasks list", () => {
@@ -81,6 +93,32 @@ test("Deleting an entry removes it from the completed tasks list", () => {
     //now compare them
     equal(result, expected);
 
+    // Check if the element is removed from the array
+    let filtered = tasksArray.filter(el => el.id === 3);
+    equal(0, filtered.length);
+
+    // Add the element again to the completed list
+    let task = createTask("Learn more about testing", 3);
+
+    // Add the completed class to the created task
+    task.querySelector("label").classList.add("completed-task");
+
+    // Check the checkbox of the created task
+    task.querySelector('input[type="checkbox"]').checked = true;
+    listOfCompletedTasks.append(task);
+
+    // Because there was only one li when we deleted the task the list was hidden, so we need to show it after we added the item again
+    showOrHideSection()
+
+    // Add the element again to the tasksArray
+    let taskObject = {
+        task: "Learn more about testing",
+        id: 3,
+        completed: true
+    }
+
+    //Add the task again to the task array in the correct position
+    tasksArray.splice(2, 0, taskObject);
 
     /*the test passes, as it should*/
 });
@@ -105,6 +143,9 @@ test("Checking an entry marks it as complete", () => {
     //now compare them
     equal(result, expected);
 
+    // After testing return it to incomplete
+    correspondingCheckbox.click();
+
 
     /*the test passes, as it should*/
 });
@@ -113,10 +154,10 @@ test("Checking an entry marks it as complete", () => {
 test("Unchecking an entry restores it to the tasks yet to be done section", () => {
 
     // first get the entry to be unchecked
-    let entryToBeUnMarkedAsCompleted = document.getElementById("task-4");
+    let entryToBeUnMarkedAsCompleted = document.getElementById("task-3");
     
     //then get the corresponding checkbox for that entry
-    let correspondingCheckbox = document.getElementById("check-uncheck-task-4");
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-3");
 
     //then click that checkbox
     correspondingCheckbox.click();
@@ -130,7 +171,9 @@ test("Unchecking an entry restores it to the tasks yet to be done section", () =
     //now compare them
     equal(result, expected);
 
-
+    //After testing return it to complete
+    correspondingCheckbox.click();
+    
     /*the test passes, as it should*/
 });
 
@@ -147,7 +190,6 @@ test("Deleting an entry that a user added (i.e not one of the default ones) remo
     const addButton = document.querySelector("button[type='submit']");
     addButton.click();
 
-
     //now get that same entry and delete it
     let entryToBeDeleted = document.getElementById("task-5");
     
@@ -163,7 +205,6 @@ test("Deleting an entry that a user added (i.e not one of the default ones) remo
 
     //now compare them
     equal(result, expected);
-
 
     /*the test passes, as it should*/
 });
@@ -199,6 +240,10 @@ test("Checking an entry that a user added (i.e not one of the default ones) mark
     //now compare them
     equal(result, expected);
 
+    // Remove the new task from the tasks array and the completed tasks list after testing
+    tasksArray.pop()
+    listOfCompletedTasks.removeChild(entryToBeMarkedAsCompleted)
+
 
     /*the test passes, as it should*/
 });
@@ -218,10 +263,10 @@ test("Unchecking an entry that a user added (i.e not one of the default ones) an
     addButton.click();
 
     // now mark that same entry as complete (only to be unchecked later)
-    let entryToBeMarkedAsCompletedAndThenUnchecked = document.getElementById("task-6");
+    let entryToBeMarkedAsCompletedAndThenUnchecked = document.getElementById("task-5");
     
     //then get the corresponding checkbox for that entry
-    let correspondingCheckbox = document.getElementById("check-uncheck-task-6");
+    let correspondingCheckbox = document.getElementById("check-uncheck-task-5");
 
     //then click that checkbox
     correspondingCheckbox.click();
@@ -238,6 +283,10 @@ test("Unchecking an entry that a user added (i.e not one of the default ones) an
 
     //now compare them
     equal(result, expected);
+
+    // Remove the new task from the tasks array and the completed tasks list after testing
+    tasksArray.pop()
+    toDoList.removeChild(entryToBeMarkedAsCompletedAndThenUnchecked)
 
 
     /*the test passes, as it should*/
