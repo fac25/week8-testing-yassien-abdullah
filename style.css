@@ -3,7 +3,7 @@
     --primary-color: rgb(19, 68, 117);
     --white: rgb(250, 250, 250);
     --white--transparent: rgba(230, 230, 230, .3);
-    --red: rgb(203, 42, 42);
+    --red: rgb(242, 95, 95);
     --secondary-color: rgb(46, 111, 73);
     --black-transparent: rgba(0, 0, 0, 0.5);
 }
@@ -118,7 +118,7 @@ button {
 
 .completed-task {
     text-decoration: line-through;
-    color: var(--white--transparent);
+    color: rgb(209, 192, 192);
 }
 
 
